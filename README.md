@@ -14,6 +14,12 @@ and then
 
 `twilio plugins:install @twilio-labs/plugin-serverless`
 
+## Studio 
+
+### Setup
+
+Create a Studio Flow connecting the first widget to `Incoming Message`. After that, create the flow you want adding at the end the `Run Function` widget. This widget must call the `finish_survey` function passing the `channelSid` parameter with value `{{trigger.message.ChannelSid}}`.
+
 ## How to use
 
 1. Setup all dependencies above: the Studio Flow and Twilio CLI packages.
