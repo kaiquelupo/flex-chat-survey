@@ -70,5 +70,5 @@ exports.handler = TokenValidator(async (context, event, callback) => {
         
     }
                  
-	callback(null, assets.response("json", { bla: "hey"}) );
+	callback(null, assets.response("json", {}) );
 });
