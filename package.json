@@ -5,10 +5,10 @@
   "scripts": {
     "bootstrap": "flex-plugin check-start",
     "prebuild": "rimraf build && npm run bootstrap",
-    "build": "flex-plugin build",
+    "build": "./node_modules/.bin/env-cmd -f .env flex-plugin build",
     "clear": "flex-plugin clear",
     "predeploy": "npm run build",
-    "deploy": "./node_modules/.bin/env-cmd -f .env flex-plugin deploy",
+    "deploy": "flex-plugin deploy",
     "eject": "flex-plugin eject",
     "info": "flex-plugin info",
     "postinstall": "npm run bootstrap",
