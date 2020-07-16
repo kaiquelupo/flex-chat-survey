@@ -7,7 +7,7 @@ exports.handler = TokenValidator(async (context, event, callback) => {
     
     const client = context.getTwilioClient();
      
-    const { taskSid, attributes, preSurveyMessages, flowSid } = event; 
+    const { taskSid, attributes, preSurveyMessages, flowSid, worker } = event; 
     
     const taskAttributes = JSON.parse(attributes);
     const messages = JSON.parse(preSurveyMessages);
@@ -35,7 +35,23 @@ exports.handler = TokenValidator(async (context, event, callback) => {
               });
               
         
-        if(flowSid) {   
+        if(flowSid) {
+
+            if(worker) {
+            
+                const { attributes } = await client.chat.services(context.CHAT_SERVICE_SID)
+                    .channels(taskAttributes.channelSid)
+                    .fetch();
+
+                await client.chat.services(context.CHAT_SERVICE_SID)
+                    .channels(taskAttributes.channelSid)
+                    .update({ attributes: JSON.stringify(
+                        {
+                            ...JSON.parse(attributes),
+                            worker
+                        }
+                    )});
+            }
             
             await client.chat.services(context.CHAT_SERVICE_SID)
                .channels(taskAttributes.channelSid)

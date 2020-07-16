@@ -28,13 +28,15 @@ export default class OutboundPlugin extends FlexPlugin {
           taskSid: payload.task.taskSid,
           attributes: JSON.stringify(payload.task.attributes),
           preSurveyMessages: JSON.stringify(preSurveyMessages),
-          flowSid: process.env.REACT_APP_FLOW_SID
+          flowSid: process.env.REACT_APP_FLOW_SID,
+          worker: manager.workerClient.attributes.full_name || manager.workerClient.attributes.contact_uri
         });
 
         abortFunction();
 
-      }
+      } 
       
     });
+
   }
 }
