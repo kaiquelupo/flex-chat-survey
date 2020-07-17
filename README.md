@@ -20,6 +20,19 @@ and then
 
 Create a Studio Flow connecting the first widget to `Incoming Message`. After that, create the flow you want adding at the end the `Run Function` widget. This widget must call the `finish_survey` function passing the `channelSid` parameter with value `{{trigger.message.ChannelSid}}`.
 
+## Flex Insights
+
+For now, all the surveys are being sent to Insights by creating a task in `finish_survey` function. If you do not want that, just remove the worker property from the request to `send_to_survey` function. For visualizing the data inside Flex Insights, create a new report with the following setup: 
+
+- **What**: select nothing here.
+- **How**: select attributes `Conversation (display label: Conversation)`, `Conversation Attribute 1`, `Conversation Attribute 2`, `Conversation Attribute 3`, `Date` and `Time`.
+- **Filter**:
+  - `Virtual is Yes` (Option "Select from a List of Values")
+  - `Kind is Conversation` (Option "Select from a List of Values")
+  - `Conversation Attribute_7 is Chat Survey` (Option "Select from a List of Values")
+
+Remember, you can rename the attributes to whatever you want in the report itself. Also, this report is just a suggestion, you can create others using the same info.
+
 ## How to use
 
 1. Setup all dependencies above: the Studio Flow and Twilio CLI packages.

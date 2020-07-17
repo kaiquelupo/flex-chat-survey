@@ -33,6 +33,7 @@ exports.handler = async function(context, event, callback) {
                         conversation_attribute_1: from,
                         conversation_attribute_2: answer1,
                         conversation_attribute_3: worker,
+                        conversation_attribute_7: "chat_survey",
                         virtual: "Yes"
                     }
                 }), 
