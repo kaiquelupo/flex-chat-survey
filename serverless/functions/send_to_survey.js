@@ -17,7 +17,8 @@ exports.handler = TokenValidator(async (context, event, callback) => {
         const updatedAttributes = {
 			...taskAttributes,
 			channelSid: 'CH00000000000000000000000000000000',
-			proxySessionSID: 'KC00000000000000000000000000000000', 
+            proxySessionSID: 'KC00000000000000000000000000000000', 
+            oldChannelSid: taskAttributes.channelSid,
 		};
 
 		await client.taskrouter

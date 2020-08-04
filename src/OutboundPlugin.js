@@ -38,5 +38,20 @@ export default class OutboundPlugin extends FlexPlugin {
       
     });
 
+    flex.Actions.addListener("afterCompleteTask", async (payload) => {
+
+      if(payload.task.channelType === "whatsapp" || payload.task.channelType === "web") { 
+
+        const { oldChannelSid } = payload.task.attributes;
+
+        await payload.task.setAttributes({
+          ...payload.task.attributes,
+          channelSid: oldChannelSid,
+        })
+
+      }
+
+    });
+
   }
 }
