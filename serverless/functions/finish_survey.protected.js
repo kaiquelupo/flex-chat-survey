@@ -15,6 +15,20 @@ exports.handler = async function(context, event, callback) {
       .update({
           attributes: JSON.stringify({ ...attributes, status: "INACTIVE" }) 
       });
+	
+    const webhooks = await client.chat.services(context.CHAT_SERVICE_SID)
+           .channels(channelSid)
+           .webhooks
+           .list({ limit: 20 });
+	
+   for(let i = 0; i < webhooks.length; i++){
+	   
+	   await client.chat.services(context.CHAT_SERVICE_SID)
+		   .channels(channelSid)
+		   .webhooks(webhooks[i].sid)
+		   .remove();
+
+   }   
       
     if(proxySession){
         await client.proxy.services(context.FLEX_PROXY_SERVICE_SID)
